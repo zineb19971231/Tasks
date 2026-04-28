@@ -1,4 +1,4 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="max-w-7xl mx-auto px-6 py-16 text-center">
@@ -31,4 +31,4 @@
         @endforeach
     </div>
 </div>
-@endsection --}}
+@endsection
