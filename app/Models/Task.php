@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+
+protected $fillable = [
+    'titre',
+    'description',
+    'category_id',
+    'statut',
+    'user_id',
+];
+
+
 public function user(){
     return $this->belogongsTo(User::class);
 }

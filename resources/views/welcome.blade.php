@@ -1,10 +1,9 @@
-@extends('layouts.app')
-
-@section('content')
+<x-app-layout>
 <div class="max-w-7xl mx-auto px-6 py-16 text-center">
     <h1 class="text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
         Gérez vos tâches avec <span class="text-indigo-600 underline decoration-indigo-200 decoration-8 underline-offset-4">élégance</span>.
     </h1>
+
     <p class="text-slate-500 text-lg max-w-2xl mx-auto mb-12">
         Une approche visuelle simple pour organiser votre quotidien professionnel et personnel.
     </p>
@@ -31,4 +30,4 @@
         @endforeach
     </div>
 </div>
-@endsection
+</x-app-layout>

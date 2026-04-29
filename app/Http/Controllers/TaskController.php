@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
@@ -26,15 +27,23 @@ public function index()
    
     public function create()
     {
-        
+        $categories = Category::all();
+        return view ('tasks.create', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+  
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'titre' => 'required|string|max:255',
+            'description' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'statut' => 'required|in:todo,doing,done',
+        ]);
+        Task::create($validateData + [
+            'user_id' => Auth::id(),
+        ]);
+        return redirect()->route('dashboard');
     }
 
     /**
