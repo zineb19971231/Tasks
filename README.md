@@ -59,3 +59,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Dashboard 
 <img width="1867" height="912" alt="image" src="https://github.com/user-attachments/assets/870b3b25-9524-4a25-9f3b-ffde84655bab" />
 
+## Create New Task
+<img width="1722" height="911" alt="image" src="https://github.com/user-attachments/assets/74c86f02-b702-4cd8-83c4-397f81af1e21" />
