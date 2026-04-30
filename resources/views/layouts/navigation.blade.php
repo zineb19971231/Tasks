@@ -11,8 +11,8 @@
             </div>
             </div>
 
-            <!-- Settings Dropdown -->
-           <div class="hidden sm:flex sm:items-center sm:ms-6">
+           <!-- Settings Dropdown -->
+<div class="hidden sm:flex sm:items-center sm:ms-6">
     @auth
         <x-dropdown align="right" width="48">
             <x-slot name="trigger">
@@ -23,10 +23,15 @@
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                </button>
-            </x-slot>
+                </button> 
+            </x-slot> {{-- Ici le bouton est bien fermé --}}
 
             <x-slot name="content">
+                <!-- Lien vers le Dashboard -->
+                <x-dropdown-link :href="route('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-dropdown-link>
+
                 <x-dropdown-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-dropdown-link>

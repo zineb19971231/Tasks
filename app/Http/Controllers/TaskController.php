@@ -49,6 +49,12 @@ public function index()
     /**
      * Display the specified resource.
      */
+    public function manage ()
+    {
+        $tasks = Task::where('user_id', Auth::id())->latest()->get();
+        return view('tasks.index', compact('tasks'));
+    }
+
     public function show(string $id)
     {
         //
@@ -57,24 +63,45 @@ public function index()
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+
+public function edit(Task $task) 
+{
+    if ($task->user_id !== Auth::id()) abort(403);
+    $categories = Category::all();
+    return view('tasks.edit', compact('categories', 'task'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+public function updateStatus(Request $request, Task $task)
+{
+    $request->validate(['statut' => 'required|in:todo,doing,done']);
+    $task->update(['statut' => $request->statut]);
+    
+    return redirect()->back()->with('success', 'Statut actualisé !');
+}
 
-    /**
-     * Remove the specified resource from storage.
-     */
+public function update(Request $request, Task $task)
+{
+    $validated = $request->validate([
+        'titre' => 'required|string|max:255',
+        'description' => 'required|string',
+        'category_id' => 'required|exists:categories,id',
+        'statut' => 'required|in:todo,doing,done',
+    ]);
+
+    $task->update($validated);
+    return redirect()->route('tasks.manage')->with('success', 'Tâche mise à jour !');
+}
+
+ 
     public function destroy(string $id)
     {
-        //
+        $tasks = Task::findorFail($id);
+        if ($tasks->user_id !== Auth::id()) abort(403);
+        $tasks->delete();
+        return redirect()->route('tasks.index')->with('success', 'Tâche supprimée !');
     }
+
 }
