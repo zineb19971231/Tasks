@@ -51,7 +51,10 @@ public function index()
      */
     public function manage ()
     {
-        $tasks = Task::where('user_id', Auth::id())->latest()->get();
+        $tasks = Task::with('category')
+        ->where('user_id', Auth::id())
+        ->latest()
+        ->get();
         return view('tasks.index', compact('tasks'));
     }
 
@@ -88,11 +91,10 @@ public function update(Request $request, Task $task)
         'titre' => 'required|string|max:255',
         'description' => 'required|string',
         'category_id' => 'required|exists:categories,id',
-        'statut' => 'required|in:todo,doing,done',
     ]);
 
     $task->update($validated);
-    return redirect()->route('tasks.manage')->with('success', 'Tâche mise à jour !');
+    return redirect()->route('tasks.index')->with('success', 'Tâche mise à jour !');
 }
 
  

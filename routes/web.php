@@ -13,8 +13,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/tasks/index', [TaskController::class, 'manage'])->name('tasks.index');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::patch('/tasks/{task}/statut', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/tasks/{task}/statut', [TaskController::class, 'updateStatus'])->name('tasks.updateStatus');
+
     Route::resource('tasks', TaskController::class);
 });
 

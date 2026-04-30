@@ -10,9 +10,10 @@ class Task extends Model
 protected $fillable = [
     'titre',
     'description',
+    'user_id',
     'category_id',
     'statut',
-    'user_id',
+    
 ];
 
 
@@ -20,18 +21,11 @@ public function user(){
     return $this->belogongsTo(User::class);
 }
 
-public function categorie(){
+public function category(){
     return $this->belongsTo(Category::class);
 }
 
-public function getStatusColor(): string
-{
-    return match($this->status) {
-        'todo'  => '#ef4444', 
-        'doing' => '#3b82f6', 
-        'done'  => '#10b981', 
-    };
-}
+
 
 
 
